@@ -1,0 +1,13 @@
+environment: local
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/lien-store
+    username: root
+    password: 2017153922
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        id:
+          new_generator_mappings: false
