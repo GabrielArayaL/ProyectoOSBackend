@@ -7,5 +7,5 @@ import lombok.Setter;
 @Setter
 public class SignUpRequest {
   private String nombre;
-  private String telefono;
+  private int telefono;
 }

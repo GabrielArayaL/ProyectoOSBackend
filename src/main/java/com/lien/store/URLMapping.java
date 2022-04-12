@@ -4,6 +4,7 @@ public final class URLMapping {
 
   public static final class Usuario {
     public static final String URL = "/usuario";
+    public static final String SIGN_UP = "/sign-up";
   }
 
   public static final class TipoSala {
@@ -12,6 +13,7 @@ public final class URLMapping {
 
   public static final class Sala {
     public static final String URL = "/sala";
+    public static final String CREATE = "/create";
   }
 
   public static final class SalaUsuario {

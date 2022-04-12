@@ -19,6 +19,9 @@ public class Sala {
   @JoinColumn(name = "id_tipo_sala_ts")
   private TipoSala id_tipo_sala_ts;
 
+  @Column(name = "nombre")
+  private String nombre;
+
   @Column(name = "fecha")
   private Date fecha;
 }
