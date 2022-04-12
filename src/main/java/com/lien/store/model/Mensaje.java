@@ -2,6 +2,7 @@ package com.lien.store.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,11 +30,13 @@ public class Mensaje {
   private TipoMensaje id_tipo_msj;
 
   @Column(name = "texto")
+  @ColumnTransformer(read = "AES_DECRYPT(texto), 'ankon')", write = "AES_ENCRYPT(?, 'ankon')")
   private byte[] texto;
 
   @Column(name = "fecha")
   private Date fecha;
 
   @Column(name = "archivo")
+  @ColumnTransformer(read = "AES_DECRYPT(archivo), 'ankon')", write = "AES_ENCRYPT(?, 'ankon')")
   private byte[] archivo;
 }

@@ -22,10 +22,12 @@ public final class URLMapping {
 
   public static final class Recordatorio {
     public static final String URL = "/recordatorio";
+    public static final String CREATE = "/create";
   }
 
   public static final class Contacto {
     public static final String URL = "/contacto";
+    public static final String CREATE = "/create";
   }
 
   public static final class TipoMensaje {
@@ -34,5 +36,6 @@ public final class URLMapping {
 
   public static final class Mensaje {
     public static final String URL = "/mensaje";
+    public static final String SEND = "/send";
   }
 }
