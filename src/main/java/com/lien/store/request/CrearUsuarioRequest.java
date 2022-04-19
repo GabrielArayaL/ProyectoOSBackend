@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MensajeRequest {
-
-  private byte[] archivo;
+public class CrearUsuarioRequest {
+  private String nombre;
+  private int telefono;
 }

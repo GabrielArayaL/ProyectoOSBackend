@@ -22,4 +22,10 @@ public class Contacto {
   @OneToOne
   @JoinColumn(name = "id_usuario2_contac")
   private Usuario id_usuario2_contact;
+
+  @Column(name = "nombre_contacto")
+  private String nombre_contacto;
+
+  @Column(name = "numero_contacto")
+  private int numero_contacto;
 }

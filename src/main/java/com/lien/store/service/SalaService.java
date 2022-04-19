@@ -5,13 +5,16 @@ import com.lien.store.model.SalaUsuario;
 import com.lien.store.model.TipoSala;
 import com.lien.store.repository.SalaRepository;
 import com.lien.store.repository.UsuarioRepository;
-import com.lien.store.request.SalaRequest;
+import com.lien.store.request.CrearSalaRequest;
+import com.lien.store.request.ModificarSalaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 @Repository
@@ -26,7 +29,7 @@ public class SalaService extends BaseService<Sala, SalaRepository> {
     this.setRepository(salaRepository);
   }
 
-  public ResponseEntity<?> crearSala(SalaRequest payload) {
+  public ResponseEntity<?> crearSala(CrearSalaRequest payload) {
 
     try {
       if (payload.getNombre_tipo_sala().equals("chat")) {
@@ -37,7 +40,9 @@ public class SalaService extends BaseService<Sala, SalaRepository> {
         Sala sala = new Sala();
         sala.setId_tipo_sala_ts(tipoSala);
         sala.setNombre(payload.getNombre_sala());
-        sala.setFecha(payload.getFecha());
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date fecha = formato.parse(payload.getFecha());
+        sala.setFecha(fecha);
 
         SalaUsuario salaUsuario = new SalaUsuario();
         salaUsuario.setId_sala_su(sala);
@@ -54,7 +59,9 @@ public class SalaService extends BaseService<Sala, SalaRepository> {
         sala.setId_tipo_sala_ts(tipoSala);
         sala.setNombre(payload.getNombre_sala());
         sala.setNombre(payload.getNombre_sala());
-        sala.setFecha(payload.getFecha());
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date fecha = formato.parse(payload.getFecha());
+        sala.setFecha(fecha);
 
         SalaUsuario salaUsuario = new SalaUsuario();
         salaUsuario.setId_sala_su(sala);
@@ -64,6 +71,20 @@ public class SalaService extends BaseService<Sala, SalaRepository> {
         salaUsuarioService.save(salaUsuario);
         return ResponseEntity.ok("Grupo Creado");
       }
+
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Error");
+    }
+  }
+
+  public ResponseEntity<?> modificarGrupo(ModificarSalaRequest payload) {
+
+    try {
+
+      Sala sala = salaRepository.findSalaById(payload.getId_sala());
+      sala.setNombre(payload.getNombre_sala());
+      this.save(sala);
+      return ResponseEntity.ok("Nombre del Grupo Modificado");
 
     } catch (Exception e) {
       return ResponseEntity.badRequest().body("Error");

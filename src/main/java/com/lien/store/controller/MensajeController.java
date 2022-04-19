@@ -5,10 +5,7 @@ import com.lien.store.request.MensajeRequest;
 import com.lien.store.service.MensajeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = URLMapping.Mensaje.URL)
@@ -16,7 +13,13 @@ public class MensajeController {
   @Autowired MensajeService mensajeService;
 
   @RequestMapping(value = URLMapping.Mensaje.SEND, method = RequestMethod.POST)
-  public ResponseEntity<?> enviarMensaje(@RequestBody MensajeRequest payload) {
-    return mensajeService.crearMensaje(payload);
+  public ResponseEntity<?> enviarMensaje(
+      @PathVariable String nombre_msj,
+      @RequestBody MensajeRequest payload,
+      @PathVariable Integer id_usuario,
+      @PathVariable Integer id_sala,
+      @PathVariable String texto,
+      @PathVariable String fecha) {
+    return mensajeService.crearMensaje(payload, nombre_msj, id_usuario, id_sala, texto, fecha);
   }
 }

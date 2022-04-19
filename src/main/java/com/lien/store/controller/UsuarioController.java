@@ -1,7 +1,8 @@
 package com.lien.store.controller;
 
 import com.lien.store.URLMapping;
-import com.lien.store.request.SignUpRequest;
+import com.lien.store.request.CrearUsuarioRequest;
+import com.lien.store.request.ModificarUsuarioRequest;
 import com.lien.store.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,12 @@ public class UsuarioController {
   @Autowired UsuarioService usuarioService;
 
   @RequestMapping(value = URLMapping.Usuario.SIGN_UP, method = RequestMethod.POST)
-  public ResponseEntity<?> crearUsuario(@RequestBody SignUpRequest payload) {
+  public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuarioRequest payload) {
     return usuarioService.crearUsuario(payload);
+  }
+
+  @RequestMapping(value = URLMapping.Usuario.MODIFY, method = RequestMethod.PUT)
+  public ResponseEntity<?> modificarUsuario(@RequestBody ModificarUsuarioRequest payload) {
+    return usuarioService.modificarUsuario(payload);
   }
 }

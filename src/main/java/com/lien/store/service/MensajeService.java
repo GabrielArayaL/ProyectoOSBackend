@@ -28,28 +28,34 @@ public class MensajeService extends BaseService<Mensaje, MensajeRepository> {
     this.setRepository(mensajeRepository);
   }
 
-  public ResponseEntity<?> crearMensaje(MensajeRequest payload) {
+  public ResponseEntity<?> crearMensaje(
+      MensajeRequest payload,
+      String nombre_msj,
+      Integer id_usuario,
+      Integer id_sala,
+      String texto,
+      String fecha) {
 
     try {
       TipoMensaje tipoMensaje = new TipoMensaje();
-      tipoMensaje.setNombre(payload.getNombre_mensaje());
+      tipoMensaje.setNombre(nombre_msj);
 
-      if (payload.getNombre_mensaje().equals("normal")) {
+      if (nombre_msj.equals("normal")) {
 
         Mensaje mensaje = new Mensaje();
-        mensaje.setId_usuario_msj(usuarioRepository.findUserById(payload.getId_usuario()));
-        mensaje.setId_sala_msj(salaRepository.findSalaById(payload.getId_sala()));
+        mensaje.setId_usuario_msj(usuarioRepository.findUserById(id_usuario));
+        mensaje.setId_sala_msj(salaRepository.findSalaById(id_sala));
         mensaje.setId_tipo_msj(tipoMensaje);
-        mensaje.setTexto(payload.getTexto());
+        mensaje.setTexto(texto.getBytes());
         mensaje.setFecha(new Date());
 
         tipoMensajeRepository.save(tipoMensaje);
         this.save(mensaje);
-      } else if (payload.getNombre_mensaje().equals("multimedia") && payload.getTexto() == null) {
+      } else if (nombre_msj.equals("multimedia") && texto == null) {
 
         Mensaje mensaje = new Mensaje();
-        mensaje.setId_usuario_msj(usuarioRepository.findUserById(payload.getId_usuario()));
-        mensaje.setId_sala_msj(salaRepository.findSalaById(payload.getId_sala()));
+        mensaje.setId_usuario_msj(usuarioRepository.findUserById(id_usuario));
+        mensaje.setId_sala_msj(salaRepository.findSalaById(id_sala));
         mensaje.setId_tipo_msj(tipoMensaje);
         mensaje.setFecha(new Date());
         mensaje.setArchivo(payload.getArchivo());
@@ -59,10 +65,10 @@ public class MensajeService extends BaseService<Mensaje, MensajeRepository> {
       } else {
 
         Mensaje mensaje = new Mensaje();
-        mensaje.setId_usuario_msj(usuarioRepository.findUserById(payload.getId_usuario()));
-        mensaje.setId_sala_msj(salaRepository.findSalaById(payload.getId_sala()));
+        mensaje.setId_usuario_msj(usuarioRepository.findUserById(id_usuario));
+        mensaje.setId_sala_msj(salaRepository.findSalaById(id_sala));
         mensaje.setId_tipo_msj(tipoMensaje);
-        mensaje.setTexto(payload.getTexto());
+        mensaje.setTexto(texto.getBytes());
         mensaje.setFecha(new Date());
         mensaje.setArchivo(payload.getArchivo());
 

@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ContactoRequest {
+public class ModificarSalaRequest {
 
-  private int id_usuario;
-  private int numero;
+  private int id_sala;
+  private String nombre_sala;
 }
