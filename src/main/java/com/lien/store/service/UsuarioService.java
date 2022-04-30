@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 @Repository
@@ -47,5 +48,32 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
     } catch (Exception e) {
       return ResponseEntity.badRequest().body("Error");
     }
+  }
+
+  public Usuario getUsuario(String nombre, int telefono) {
+
+    try {
+      return usuarioRepository.findUserByNameAndNum(nombre, telefono);
+    } catch (Exception e) {
+      return null;
+    }
+  }
+
+  /*public List<UsuarioDTO> getContactoDTOList(List<Usuario> usuarioList) {
+
+    List<UsuarioDTO> contactoDTOS = new ArrayList<>();
+
+    usuarioList.forEach(organization -> contactoDTOS.add(getCotactoDTO(organization)));
+
+    return contactoDTOS;
+  }*/
+
+  public List<Usuario> getCotactoDTO(Usuario usuario) {
+
+    // List<Usuario> usuarios = usuarioRepository.findContacts(usuario.getId_usuario());
+
+    // return UsuarioDTO.builder().usuario(usuarios).build();
+
+    return usuarioRepository.findContacts(usuario.getId_usuario());
   }
 }

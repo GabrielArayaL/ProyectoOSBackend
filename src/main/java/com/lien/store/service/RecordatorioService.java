@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Repository
@@ -41,6 +42,16 @@ public class RecordatorioService extends BaseService<Recordatorio, RecordatorioR
 
     } catch (Exception e) {
       return ResponseEntity.badRequest().body("Error");
+    }
+  }
+
+  public List<?> getRecordatorioList(int id) {
+
+    try {
+      return recordatorioRepository.findRecordatorioByIdUser(id);
+
+    } catch (Exception e) {
+      return null;
     }
   }
 

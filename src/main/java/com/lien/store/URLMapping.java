@@ -5,7 +5,9 @@ public final class URLMapping {
   public static final class Usuario {
     public static final String URL = "/usuario";
     public static final String SIGN_UP = "/sign-up";
+    public static final String SIGN_IN = "/sign-in/{nombre}/{telefono}";
     public static final String MODIFY = "/modify";
+    public static final String GET = "/get/{id}";
   }
 
   public static final class TipoSala {
@@ -16,6 +18,7 @@ public final class URLMapping {
     public static final String URL = "/sala";
     public static final String CREATE = "/create";
     public static final String MODIFY = "/modify";
+    public static final String GET = "/get/{id}";
   }
 
   public static final class SalaUsuario {
@@ -25,6 +28,7 @@ public final class URLMapping {
   public static final class Recordatorio {
     public static final String URL = "/recordatorio";
     public static final String CREATE = "/create";
+    public static final String GET = "/get/{id_user}";
     public static final String MODIFY = "/modify";
   }
 
@@ -41,5 +45,6 @@ public final class URLMapping {
   public static final class Mensaje {
     public static final String URL = "/mensaje";
     public static final String SEND = "/send/{nombre_msj}/{id_usuario}/{id_sala}/{texto}";
+    public static final String GET = "/get/{id}";
   }
 }

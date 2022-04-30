@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Repository
@@ -88,6 +89,15 @@ public class SalaService extends BaseService<Sala, SalaRepository> {
 
     } catch (Exception e) {
       return ResponseEntity.badRequest().body("Error");
+    }
+  }
+
+  public List<Sala> getSala(int id_usuario) {
+
+    try {
+      return salaRepository.findSalaByIdUser(id_usuario);
+    } catch (Exception e) {
+      return null;
     }
   }
 }

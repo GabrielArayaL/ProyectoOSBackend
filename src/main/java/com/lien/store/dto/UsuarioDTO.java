@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class UsuarioDTO {
-  private int id_usuario;
+  private int id_usario;
   private String nombre;
   private int telefono;
 }
