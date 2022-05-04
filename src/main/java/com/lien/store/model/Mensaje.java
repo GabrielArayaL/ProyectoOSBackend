@@ -30,13 +30,17 @@ public class Mensaje {
   private TipoMensaje id_tipo_msj;
 
   @Column(name = "texto")
-  @ColumnTransformer(read = "AES_DECRYPT(texto), 'ankon')", write = "AES_ENCRYPT(?, 'ankon')")
-  private byte[] texto;
+  @ColumnTransformer(
+      read = "CAST(AES_DECRYPT(UNHEX(texto), 'ankon') as char(128))",
+      write = "HEX(AES_ENCRYPT(?, 'ankon'))")
+  private String texto;
 
   @Column(name = "fecha")
   private Date fecha;
 
   @Column(name = "archivo")
-  @ColumnTransformer(read = "AES_DECRYPT(archivo), 'ankon')", write = "AES_ENCRYPT(?, 'ankon')")
-  private byte[] archivo;
+  @ColumnTransformer(
+      read = "CAST(AES_DECRYPT(UNHEX(archivo), 'ankon') as char(128))",
+      write = "HEX(AES_ENCRYPT(?, 'ankon'))")
+  private String archivo;
 }

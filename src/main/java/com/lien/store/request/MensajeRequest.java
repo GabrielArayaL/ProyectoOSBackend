@@ -7,5 +7,8 @@ import lombok.Setter;
 @Setter
 public class MensajeRequest {
 
-  private byte[] archivo;
+  private int id_usuario;
+  private int id_sala;
+  private String nombre_msj;
+  private String texto;
 }

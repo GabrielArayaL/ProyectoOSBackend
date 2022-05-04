@@ -44,7 +44,8 @@ public final class URLMapping {
 
   public static final class Mensaje {
     public static final String URL = "/mensaje";
-    public static final String SEND = "/send/{nombre_msj}/{id_usuario}/{id_sala}/{texto}";
+    public static final String SENDN = "/send/normal";
+    public static final String SENDM = "/send/multimedia";
     public static final String GET = "/get/{id}";
   }
 }
