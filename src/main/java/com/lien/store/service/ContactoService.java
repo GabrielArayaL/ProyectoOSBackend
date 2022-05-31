@@ -32,6 +32,7 @@ public class ContactoService extends BaseService<Contacto, ContactoRepository> {
       contacto.setId_usuario2_contact(usuarioRepository.findUserByCellphone(payload.getNumero()));
       contacto.setNombre_contacto(payload.getNombre_contacto());
       contacto.setNumero_contacto(payload.getNumero());
+      contacto.setBloqueado(0);
       this.save(contacto);
       return ResponseEntity.ok("Contacto agregado");
 
@@ -48,6 +49,44 @@ public class ContactoService extends BaseService<Contacto, ContactoRepository> {
       contacto.setNumero_contacto(payload.getNumero_contacto());
       this.save(contacto);
       return ResponseEntity.ok("Contacto modificado");
+
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Error");
+    }
+  }
+
+  public ResponseEntity<?> bloquearContacto(int id1, int id2) {
+
+    try {
+      Contacto contacto1 = contactoRepository.findContactoBloqueadoById(id1, id2);
+      Contacto contacto2 = contactoRepository.findContactoBloqueadoById(id2, id1);
+      if (contacto1 != null && contacto2 != null) {
+        contacto1.setBloqueado(1);
+        contacto2.setBloqueado(1);
+        this.save(contacto1);
+        this.save(contacto2);
+        return ResponseEntity.ok("Contacto Bloqueado");
+      }
+      return ResponseEntity.ok("El contacto ya se encuentra Bloqueado");
+
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Error");
+    }
+  }
+
+  public ResponseEntity<?> desbloquearContacto(int id1, int id2) {
+
+    try {
+      Contacto contacto1 = contactoRepository.findContactoDesbloqueadoById(id1, id2);
+      Contacto contacto2 = contactoRepository.findContactoDesbloqueadoById(id2, id1);
+      if (contacto1 != null && contacto2 != null) {
+        contacto1.setBloqueado(0);
+        contacto2.setBloqueado(0);
+        this.save(contacto1);
+        this.save(contacto2);
+        return ResponseEntity.ok("Contacto Desbloqueado");
+      }
+      return ResponseEntity.ok("El contacto ya se encuentra Desbloqueado");
 
     } catch (Exception e) {
       return ResponseEntity.badRequest().body("Error");

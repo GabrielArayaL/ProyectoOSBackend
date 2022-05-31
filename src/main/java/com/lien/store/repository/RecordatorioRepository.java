@@ -20,4 +20,9 @@ public interface RecordatorioRepository extends JpaRepository<Recordatorio, Long
       value = "SELECT r.* FROM `os`.recordatorio as r where r.id_usuario_recorda = (:id)  \n",
       nativeQuery = true)
   List<Recordatorio> findRecordatorioByIdUser(@Param("id") int id);
+
+  @Query(
+      value = "DELETE FROM `os`.recordatorio  where id_recordatorio = (:id)  \n",
+      nativeQuery = true)
+  List<Recordatorio> DeleteRecordatorioById(@Param("id") int id);
 }

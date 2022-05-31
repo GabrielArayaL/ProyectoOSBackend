@@ -5,10 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MensajeRequest {
+public class ModificarMensajeRequest {
 
-  private int id_usuario;
-  private int id_sala;
-  private String nombre_msj;
+  private int id_mensaje;
   private String texto;
 }

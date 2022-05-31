@@ -29,4 +29,9 @@ public class RecordatorioController {
   public ResponseEntity<?> modificarUsuario(@RequestBody ModificarRecordatorioRequest payload) {
     return recordatorioService.modificarRecordatorio(payload);
   }
+
+  @RequestMapping(value = URLMapping.Recordatorio.DELETE, method = RequestMethod.PUT)
+  public ResponseEntity<?> eliminarUsuario(@PathVariable int id) {
+    return recordatorioService.eliminarRecordatorio(id);
+  }
 }

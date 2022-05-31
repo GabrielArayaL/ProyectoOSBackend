@@ -30,12 +30,15 @@ public final class URLMapping {
     public static final String CREATE = "/create";
     public static final String GET = "/get/{id_user}";
     public static final String MODIFY = "/modify";
+    public static final String DELETE = "/delete/{id}";
   }
 
   public static final class Contacto {
     public static final String URL = "/contacto";
     public static final String CREATE = "/create";
     public static final String MODIFY = "/modify";
+    public static final String LOCK = "/lock/{id1}/{id2}";
+    public static final String UNLOCK = "/unlock/{id1}/{id2}";
   }
 
   public static final class TipoMensaje {
@@ -44,8 +47,11 @@ public final class URLMapping {
 
   public static final class Mensaje {
     public static final String URL = "/mensaje";
-    public static final String SENDN = "/send/normal";
+    public static final String SENDN = "/send/normal/{id}";
     public static final String SENDM = "/send/multimedia";
+    public static final String MODIFYN = "/modify";
+    public static final String DELETEN = "/delete/{id}";
     public static final String GET = "/get/{id}";
+    public static final String GETFILTER = "/get/{filter}/{id}";
   }
 }

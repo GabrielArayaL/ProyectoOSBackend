@@ -28,4 +28,7 @@ public class Contacto {
 
   @Column(name = "numero_contacto")
   private int numero_contacto;
+
+  @Column(name = "bloqueado")
+  private int bloqueado;
 }

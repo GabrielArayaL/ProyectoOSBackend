@@ -72,4 +72,15 @@ public class RecordatorioService extends BaseService<Recordatorio, RecordatorioR
       return ResponseEntity.badRequest().body("Error");
     }
   }
+
+  public ResponseEntity<?> eliminarRecordatorio(int id) {
+
+    try {
+      recordatorioRepository.delete(recordatorioRepository.findRecordatorioById(id));
+      return ResponseEntity.ok("Recordatorio Eliminado");
+
+    } catch (Exception e) {
+      return ResponseEntity.badRequest().body("Error");
+    }
+  }
 }
