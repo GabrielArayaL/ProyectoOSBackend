@@ -1,6 +1,8 @@
 package com.lien.store.service;
 
+import com.lien.store.model.Segurity;
 import com.lien.store.model.Usuario;
+import com.lien.store.repository.SegurityRepository;
 import com.lien.store.repository.UsuarioRepository;
 import com.lien.store.request.CrearUsuarioRequest;
 import com.lien.store.request.ModificarUsuarioRequest;
@@ -16,6 +18,7 @@ import java.util.List;
 @Repository
 public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
   @Autowired UsuarioRepository usuarioRepository;
+  @Autowired SegurityRepository segurityRepository;
 
   @PostConstruct
   public void setVariables() {
@@ -25,9 +28,16 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
   public ResponseEntity<?> crearUsuario(CrearUsuarioRequest payload) {
 
     try {
+
       Usuario usuario = new Usuario();
       usuario.setNombre(payload.getNombre());
       usuario.setTelefono(payload.getTelefono());
+
+      Segurity segurity = new Segurity();
+      segurity.setId_usuario_seg(usuario);
+      segurity.setPassword(payload.getPassword());
+
+      segurityRepository.save(segurity);
       this.save(usuario);
       return ResponseEntity.ok("Usuario agregado");
 
@@ -50,10 +60,10 @@ public class UsuarioService extends BaseService<Usuario, UsuarioRepository> {
     }
   }
 
-  public Usuario getUsuario(String nombre, int telefono) {
+  public Usuario getUsuario(String nombre, String password) {
 
     try {
-      return usuarioRepository.findUserByNameAndNum(nombre, telefono);
+      return usuarioRepository.findUserByNameAndPass(nombre, password);
     } catch (Exception e) {
       return null;
     }

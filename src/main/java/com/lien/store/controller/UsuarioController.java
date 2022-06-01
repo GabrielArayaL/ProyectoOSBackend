@@ -24,8 +24,8 @@ public class UsuarioController {
   }
 
   @RequestMapping(value = URLMapping.Usuario.SIGN_IN, method = RequestMethod.GET)
-  public Usuario crearUsuario(@PathVariable String nombre, @PathVariable int telefono) {
-    return usuarioService.getUsuario(nombre, telefono);
+  public Usuario getUsuario(@PathVariable String nombre, @PathVariable String password) {
+    return usuarioService.getUsuario(nombre, password);
   }
 
   @RequestMapping(value = URLMapping.Usuario.MODIFY, method = RequestMethod.PUT)

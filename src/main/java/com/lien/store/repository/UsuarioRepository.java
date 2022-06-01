@@ -30,8 +30,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
   @Query(
       value =
-          "SELECT u.* FROM `os`.usuario as u  where u.nombre = (:nombre) "
-              + " and u.telefono = (:telefono) \n",
+          "SELECT u.* FROM `os`.usuario as u join `os`.segurity as s where "
+              + " u.id_usuario = s.id_usuario_seg and u.nombre = (:nombre) "
+              + " and s.password = (:password) \n",
       nativeQuery = true)
-  Usuario findUserByNameAndNum(@Param("nombre") String nombre, @Param("telefono") int telefono);
+  Usuario findUserByNameAndPass(@Param("nombre") String nombre, @Param("password") String password);
 }
